@@ -9,7 +9,6 @@ RUN apt-get install -y -q software-properties-common wget
 RUN add-apt-repository -y ppa:mozillateam/firefox-next
 RUN add-apt-repository -y ppa:openjdk-r/ppa
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-#RUN echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
 RUN wget https://deb.nodesource.com/setup_6.x; mv setup_6.x nodesource_setup.sh
 RUN bash nodesource_setup.sh
 RUN apt-get update -y
@@ -39,6 +38,8 @@ RUN npm install -g \
   selenium-standalone \
   phantomjs-prebuilt
 RUN selenium-standalone install
+RUN echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
+RUN apt-get update
 RUN apt-get install -y  google-chrome-beta
 RUN php -r "copy('https://getcomposer.org/installer', '/tmp/composer-setup.php');"
 RUN php /tmp/composer-setup.php --install-dir="/usr/local/bin"
