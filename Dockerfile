@@ -11,11 +11,13 @@ RUN add-apt-repository -y ppa:openjdk-r/ppa
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
 RUN wget https://deb.nodesource.com/setup_6.x; mv setup_6.x nodesource_setup.sh
 RUN bash nodesource_setup.sh
+RUN wget https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh -q -O - | bash -s
 RUN apt-get update -y
 RUN apt-get install -y -q \
   bzip2 \
   firefox \
   git \
+  git-lfs \
   openjdk-8-jre-headless \
   nano \
   nodejs \
@@ -27,6 +29,7 @@ RUN apt-get install -y -q \
   xfonts-75dpi \
   xfonts-scalable \
   xfonts-cyrillic
+RUN git lfs install
 RUN useradd -d /home/seleuser -m seleuser
 RUN mkdir -p /home/seleuser/chrome
 RUN chown -R seleuser /home/seleuser
